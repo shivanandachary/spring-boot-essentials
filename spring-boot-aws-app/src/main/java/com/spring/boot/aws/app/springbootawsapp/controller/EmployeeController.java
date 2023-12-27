@@ -21,13 +21,13 @@ import com.spring.boot.aws.app.springbootawsapp.model.Employee;
 import com.spring.boot.aws.app.springbootawsapp.service.EmployeeService;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/")
 public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService empService;	
 	
-	@GetMapping("/loadData")
+	@GetMapping("/employee/loadData")
 	public List<Employee> getEmpInfo() {
 		List<Employee> employees = EmployeeService.loadDefaultEmployees();
 		return empService.loadDefaultData(employees);
@@ -40,7 +40,7 @@ public class EmployeeController {
 		
 	}
 
-	@GetMapping("/retrive/{empId}")
+	@GetMapping("/employee/retrive/{empId}")
 	public Optional<Employee> getEmployee(@PathVariable Integer empId) throws EmployeeNotFoundEception{
 		Optional<Employee> emp= empService.getEmployeeById(empId);
 		if(!emp.isEmpty()) {
@@ -51,17 +51,17 @@ public class EmployeeController {
 		}
 	}
 	
-	@PostMapping("/create/createEmployee")
+	@PostMapping("/employee/create/createEmployee")
 	public Employee createEmployee(@RequestBody Employee employee){
 		return empService.saveEmployee(employee);		
 	}
 	
-	@GetMapping("/retrive/allEmployees")
+	@GetMapping("/employee/retrive/allEmployees")
 	public List<Employee> getAllEmployees(){
 		return empService.getAllEmployees();		
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/employee/update")
 	public Employee updateEmployee(@RequestBody Employee employee){
 		return empService.saveOrUpdateEmployee(employee);		
 	}
@@ -72,13 +72,13 @@ public class EmployeeController {
 	}
 	
 
-	@DeleteMapping("/delete/allEmployee")
+	@DeleteMapping("/employee/delete/allEmployee")
 	public String deleteAllEmployee(){
 		empService.deleteAllEmployee();	
 		return "All Employee have been delete from DB !";
 	}
 	
-	@PatchMapping("/update/{empId}")
+	@PatchMapping("/employee/update/{empId}")
 	public Employee updateEmployeeFields(@PathVariable Integer empId,@RequestBody Map<String,Object> fields) throws EmployeeNotFoundEception{
 		Employee emp = empService.updateEmployeeByFields(empId,fields);
 		if(emp != null) {

@@ -1,0 +1,30 @@
+Added dependency in the POM.XML
+
+<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+		<dependency>
+			 <groupId>org.springdoc</groupId>
+			 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			 <version>2.0.3</version>
+		</dependency>
+		
+--Then created a Congiguration class for Swagger-ui
+
+
+@Configuration
+public class EmployeeServiceSwaggerAPI {
+
+   @Bean
+	public OpenAPI defineOpenApi() {
+		Server server = new Server();
+		server.setUrl("http://ec2-3-109-224-154.ap-south-1.compute.amazonaws.com/");
+		server.setDescription("Senior Lead Engineer");
+
+		Contact myContact = new Contact();
+		myContact.setName("Shivanandachary Arroju");
+		myContact.setEmail("shivananda0011@gmail.com");
+
+		Info information = new Info().title("Employee Management System API").version("1.0")
+				.description("This API exposes endpoints to manage employees.").contact(myContact);
+		return new OpenAPI().info(information).servers(List.of(server));
+	}
+}

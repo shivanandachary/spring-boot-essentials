@@ -28,6 +28,8 @@ public class Employee {
 	@Column
 	private Double empSalary;
 	
+	private Address address;
+	
 	public Employee() {}
 
 	public Employee(String empFirstName, String empLastName,String department,Double empSalary) {
